@@ -4,6 +4,7 @@ extends Node2D
 @onready var right_score: Label = $Scores/HBoxContainer/right_score
 @onready var left_score: Label = $Scores/HBoxContainer/left_score
 
+# right_paddle = 0, left_paddle = 1
 var starter: int = 0
 
 func _ready() -> void:
@@ -19,6 +20,7 @@ func _physics_process(_delta: float) -> void:
 		right_score.text = str(0)
 		left_score.text = str(0)
 
+# --- Score Logic ---
 func _on_player_scored(player):
 	starter = player
 	ball.reset()

@@ -6,11 +6,13 @@ extends CharacterBody2D
 @export var ball_x_max_speed: float = 1000
 @export var ball_x_speed: float = 500
 
+# Signal is used in game.gd for score logic
 signal scored(player)
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
+	# --- Bounce Logic ---
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
@@ -30,6 +32,7 @@ func _physics_process(_delta: float) -> void:
 			velocity.y = [-50, 50].pick_random()
 		break
 
+# Functions are used in game.gd
 func start_round(starter):
 	if velocity == Vector2.ZERO:
 			var ball_speed = Vector2(ball_x_speed, randf_range(-200, 200))
