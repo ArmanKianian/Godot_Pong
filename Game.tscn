@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://0fnao5b7q6fd"]
 
 [ext_resource type="Script" uid="uid://dxl7cj2afxctt" path="res://game.gd" id="1_wbfu4"]
+[ext_resource type="Script" uid="uid://yhfrrfgt2oap" path="res://paddle.gd" id="2_xkndl"]
+[ext_resource type="Script" uid="uid://ctcqa5pms3kmb" path="res://ball.gd" id="3_u44n3"]
 
 [sub_resource type="Gradient" id="Gradient_6ubv3"]
 offsets = PackedFloat32Array(0.48795182)
@@ -75,6 +77,7 @@ offset_right = 575.0
 offset_bottom = 275.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Scores" unique_id=941387327]
 layout_mode = 1
@@ -118,6 +121,10 @@ shape = SubResource("WorldBoundaryShape2D_xkndl")
 
 [node name="left_paddle" type="CharacterBody2D" parent="." unique_id=1447679319]
 position = Vector2(-550, 0)
+script = ExtResource("2_xkndl")
+up_action = "left_up"
+down_action = "left_down"
+paddle_speed = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="left_paddle" unique_id=655136033]
 texture = SubResource("GradientTexture2D_xkndl")
@@ -127,6 +134,10 @@ shape = SubResource("RectangleShape2D_wbfu4")
 
 [node name="right_paddle" type="CharacterBody2D" parent="." unique_id=1004937686]
 position = Vector2(550, 0)
+script = ExtResource("2_xkndl")
+up_action = "right_up"
+down_action = "right_down"
+paddle_speed = 700.0
 
 [node name="Sprite2D" type="Sprite2D" parent="right_paddle" unique_id=364057650]
 texture = SubResource("GradientTexture2D_xkndl")
@@ -137,6 +148,7 @@ shape = SubResource("RectangleShape2D_xkndl")
 [node name="ball" type="CharacterBody2D" parent="." unique_id=513720830]
 collision_layer = 2
 motion_mode = 1
+script = ExtResource("3_u44n3")
 
 [node name="Sprite2D" type="Sprite2D" parent="ball" unique_id=512202491]
 texture = SubResource("GradientTexture2D_u44n3")
@@ -158,5 +170,5 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_gate" unique_id=1302646115]
 shape = SubResource("RectangleShape2D_u44n3")
 
-[connection signal="body_entered" from="right_gate" to="." method="_on_right_gate_body_entered"]
-[connection signal="body_entered" from="left_gate" to="." method="_on_left_gate_body_entered"]
+[connection signal="body_entered" from="right_gate" to="ball" method="_on_right_gate_body_entered"]
+[connection signal="body_entered" from="left_gate" to="ball" method="_on_left_gate_body_entered"]
