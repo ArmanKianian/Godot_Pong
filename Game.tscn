@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://0fnao5b7q6fd"]
+
+[ext_resource type="Script" uid="uid://dxl7cj2afxctt" path="res://game.gd" id="1_wbfu4"]
+
+[sub_resource type="Gradient" id="Gradient_6ubv3"]
+offsets = PackedFloat32Array(0.48795182)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wbfu4"]
+gradient = SubResource("Gradient_6ubv3")
+width = 1150
+height = 650
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ubv3"]
+font_size = 64
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wbfu4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xkndl"]
+
+[sub_resource type="Gradient" id="Gradient_wbfu4"]
+offsets = PackedFloat32Array(0.4698795)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xkndl"]
+gradient = SubResource("Gradient_wbfu4")
+width = 16
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbfu4"]
+size = Vector2(16, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkndl"]
+size = Vector2(16, 64)
+
+[sub_resource type="Gradient" id="Gradient_xkndl"]
+offsets = PackedFloat32Array(0, 0.12048193, 0.16867469)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.85294116, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u44n3"]
+gradient = SubResource("Gradient_xkndl")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wbfu4"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u44n3"]
+size = Vector2(10, 540)
+
+[node name="Game" type="Node2D" unique_id=1712834225]
+script = ExtResource("1_wbfu4")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1798112172]
+position = Vector2(0, -50)
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1825363034]
+position = Vector2(0, -50)
+texture = SubResource("GradientTexture2D_wbfu4")
+
+[node name="Center" type="Line2D" parent="." unique_id=122229293]
+position = Vector2(-575, -375)
+points = PackedVector2Array(575, 100, 575, 650)
+width = 1.0
+
+[node name="Scores" type="Control" parent="." unique_id=229646310]
+clip_contents = true
+custom_minimum_size = Vector2(1150, 650)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -575.0
+offset_top = -375.0
+offset_right = 575.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scores" unique_id=941387327]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="left_score" type="Label" parent="Scores/HBoxContainer" unique_id=1883141963]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_6ubv3")
+horizontal_alignment = 1
+
+[node name="right_score" type="Label" parent="Scores/HBoxContainer" unique_id=2138952066]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_6ubv3")
+horizontal_alignment = 1
+
+[node name="Screen boundaries" type="StaticBody2D" parent="." unique_id=996997326]
+position = Vector2(0, -50)
+
+[node name="screen boundaries" type="Line2D" parent="Screen boundaries" unique_id=1096301981]
+position = Vector2(-575, -325)
+points = PackedVector2Array(0, 100, 575, 100, 575, 0, 0, 0, 0, 650, 1150, 650, 1150, 0, 575, 0, 575, 100, 1150, 100)
+
+[node name="top_collision" type="CollisionShape2D" parent="Screen boundaries" unique_id=1742814701]
+position = Vector2(0, -220)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_wbfu4")
+
+[node name="bottom_collision" type="CollisionShape2D" parent="Screen boundaries" unique_id=1953733001]
+position = Vector2(0, 320)
+shape = SubResource("WorldBoundaryShape2D_xkndl")
+
+[node name="left_paddle" type="CharacterBody2D" parent="." unique_id=1447679319]
+position = Vector2(-550, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="left_paddle" unique_id=655136033]
+texture = SubResource("GradientTexture2D_xkndl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_paddle" unique_id=761896224]
+shape = SubResource("RectangleShape2D_wbfu4")
+
+[node name="right_paddle" type="CharacterBody2D" parent="." unique_id=1004937686]
+position = Vector2(550, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="right_paddle" unique_id=364057650]
+texture = SubResource("GradientTexture2D_xkndl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_paddle" unique_id=1539076593]
+shape = SubResource("RectangleShape2D_xkndl")
+
+[node name="ball" type="CharacterBody2D" parent="." unique_id=513720830]
+collision_layer = 2
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="ball" unique_id=512202491]
+texture = SubResource("GradientTexture2D_u44n3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball" unique_id=1971740357]
+shape = SubResource("CircleShape2D_wbfu4")
+
+[node name="right_gate" type="Area2D" parent="." unique_id=764707317]
+position = Vector2(575, 0)
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_gate" unique_id=1538817582]
+shape = SubResource("RectangleShape2D_u44n3")
+
+[node name="left_gate" type="Area2D" parent="." unique_id=843209927]
+position = Vector2(-575, 0)
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_gate" unique_id=1302646115]
+shape = SubResource("RectangleShape2D_u44n3")
+
+[connection signal="body_entered" from="right_gate" to="." method="_on_right_gate_body_entered"]
+[connection signal="body_entered" from="left_gate" to="." method="_on_left_gate_body_entered"]
