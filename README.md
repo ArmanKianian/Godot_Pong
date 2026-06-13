@@ -1,3 +1,4 @@
+![Pong](https://github.com/ArmanKianian/Godot_Pong/blob/main/Pong.png)
 # Godot_Pong
  A Classic Pong clone made with Godot 4.6. My first completed game project.
 
